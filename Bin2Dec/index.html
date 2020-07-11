@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0px
+        }
+
+        .container {
+            background: #3d5d80;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .box {
+            display: flex;
+            flex: 1/2;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            border-style: solid;
+            border-radius: 26px;
+            border-width: 1px;
+            width: 400px;
+            height: 400px;
+            background: rgb(233, 226, 226);
+        }
+
+        input[type=text] {
+            border-style: solid;
+            border-radius: 2px;
+            border-width: 1px;
+            background-color: #fcfcfcfc;
+            height: 35px;
+            font-size: 14pt;
+            padding-left: 5px;
+        }
+
+        button {
+            border-style: solid;
+            border-radius: 2px;
+            border-width: 1px;
+            background-color: #ecdedefc;
+            height: 35px;
+            font-size: 18pt;
+        }
+    </style>
+    <title>Bin2Dec</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="box">
+            <h1>Bin2Dec</h1>
+            <h3>Conversor de Binário para Decimal</h3>
+            <p>
+                <input class="inputText" id="binary" name="binary" placeholder="Insira um valor binário" type="text"
+                    maxlength="8">
+            </p>
+            <p>
+                <input id="decimal" name="decimal" placeholder="Valor em Decimal" readonly type="text" maxlength="8">
+            </p>
+            <p>
+                <button id="convert" name="convert" onclick="convertBin2Dec()">Converter</button>
+            </p>
+        </div>
+    </div>
+
+
+
+</body>
+
+<script type="text/javascript">
+    function convertBin2Dec() {
+        let binary = document.getElementById("binary").value;
+        if (binary.trim() == "") {
+            alert('Necessário preencher o campo');
+            document.getElementById("binary").focus();
+            return;
+        }
+        let resposta = 0;
+        for (let index = 0; index < binary.length; index++) {
+            let digito = parseInt(binary[index]);
+            if (digito != 1 && digito != 0) {
+                alert('Digite apenas nº binários');
+                document.getElementById("binary").focus();
+                return;
+            }
+            let potencia = binary.length - index - 1;
+            resposta = resposta + digito * (2 ** potencia);
+        }
+        document.getElementById("decimal").value = resposta;
+    }
+</script>
+
+</html>
